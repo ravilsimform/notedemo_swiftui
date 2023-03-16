@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		412067A829C31BAF00752B1E /* custom_textfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412067A729C31BAF00752B1E /* custom_textfield.swift */; };
+		412067AB29C31D9200752B1E /* custom_label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412067AA29C31D9200752B1E /* custom_label.swift */; };
+		412067AE29C31FBD00752B1E /* dynamic_stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412067AD29C31FBD00752B1E /* dynamic_stack.swift */; };
 		412E57972934D574002FDBD8 /* NoteAppDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412E57962934D574002FDBD8 /* NoteAppDemoApp.swift */; };
 		412E57992934D574002FDBD8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412E57982934D574002FDBD8 /* ContentView.swift */; };
 		412E579B2934D575002FDBD8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 412E579A2934D575002FDBD8 /* Assets.xcassets */; };
@@ -48,6 +51,9 @@
 
 /* Begin PBXFileReference section */
 		00E272B29E598A977C904BE3 /* Pods-NoteAppDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoteAppDemoTests.debug.xcconfig"; path = "Target Support Files/Pods-NoteAppDemoTests/Pods-NoteAppDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
+		412067A729C31BAF00752B1E /* custom_textfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = custom_textfield.swift; sourceTree = "<group>"; };
+		412067AA29C31D9200752B1E /* custom_label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = custom_label.swift; sourceTree = "<group>"; };
+		412067AD29C31FBD00752B1E /* dynamic_stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dynamic_stack.swift; sourceTree = "<group>"; };
 		412E57932934D574002FDBD8 /* NoteAppDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoteAppDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		412E57962934D574002FDBD8 /* NoteAppDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteAppDemoApp.swift; sourceTree = "<group>"; };
 		412E57982934D574002FDBD8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -106,6 +112,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		412067A629C31B9800752B1E /* TextFields */ = {
+			isa = PBXGroup;
+			children = (
+				412067A729C31BAF00752B1E /* custom_textfield.swift */,
+			);
+			path = TextFields;
+			sourceTree = "<group>";
+		};
+		412067A929C31D7100752B1E /* Labels */ = {
+			isa = PBXGroup;
+			children = (
+				412067AA29C31D9200752B1E /* custom_label.swift */,
+			);
+			path = Labels;
+			sourceTree = "<group>";
+		};
+		412067AC29C31FB100752B1E /* DynamicStack */ = {
+			isa = PBXGroup;
+			children = (
+				412067AD29C31FBD00752B1E /* dynamic_stack.swift */,
+			);
+			path = DynamicStack;
+			sourceTree = "<group>";
+		};
 		412E578A2934D574002FDBD8 = {
 			isa = PBXGroup;
 			children = (
@@ -240,6 +270,9 @@
 		41D669332935BD2300041836 /* CustomUIELements */ = {
 			isa = PBXGroup;
 			children = (
+				412067AC29C31FB100752B1E /* DynamicStack */,
+				412067A929C31D7100752B1E /* Labels */,
+				412067A629C31B9800752B1E /* TextFields */,
 				41D669382935CD4B00041836 /* Images */,
 				41D669342935BD4600041836 /* Buttons */,
 			);
@@ -562,9 +595,12 @@
 				41D669442935ED8600041836 /* ImageLoader.swift in Sources */,
 				41D669372935BD5D00041836 /* custom_button.swift in Sources */,
 				41D669322935BCA500041836 /* welcome_view.swift in Sources */,
+				412067AE29C31FBD00752B1E /* dynamic_stack.swift in Sources */,
 				41D6693F2935D60A00041836 /* firebase_auth_services.swift in Sources */,
 				412E57C92934DAC3002FDBD8 /* login_view.swift in Sources */,
+				412067A829C31BAF00752B1E /* custom_textfield.swift in Sources */,
 				41D6693A2935CD5D00041836 /* custom_image.swift in Sources */,
+				412067AB29C31D9200752B1E /* custom_label.swift in Sources */,
 				41D669422935D77D00041836 /* user_model.swift in Sources */,
 				412E57972934D574002FDBD8 /* NoteAppDemoApp.swift in Sources */,
 			);

@@ -15,5 +15,4 @@ struct UserModel: Codable {
     var password: String?
     
     
-    
 }

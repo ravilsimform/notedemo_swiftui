@@ -8,8 +8,19 @@
 import SwiftUI
 
 struct signup_view: View {
+    @State private var firstNameTextField: String = ""
+    @State private var lastNameTextField: String = ""
+    @State private var emailTxtField: String = ""
+    @State private var passwordTxtField: String = ""
+    @State private var confPasswordTxtField: String = ""
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack{
+            TextField("First Name", text: $firstNameTextField).textFieldStyle(CustomTextField())
+            TextField("Last Name", text: $lastNameTextField).textFieldStyle(CustomTextField())
+            TextField("Password", text: $passwordTxtField).textFieldStyle(CustomTextField())
+            TextField("Confirm Password", text: $passwordTxtField).textFieldStyle(CustomTextField())
+            CustomButton(button_text: "Signup", action:  {})
+        }
     }
 }
 

@@ -8,8 +8,14 @@
 import SwiftUI
 
 struct login_view: View {
+    @State private var emailTxtField: String = ""
+    @State private var passwordTxtField: String = ""
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack{
+            TextField("Email", text: $emailTxtField).textFieldStyle(CustomTextField())
+            TextField("Password", text: $passwordTxtField).textFieldStyle(CustomTextField())
+            CustomButton(button_text: "Login", action: {})
+        }
     }
 }
 
