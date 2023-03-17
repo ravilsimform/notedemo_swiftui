@@ -41,7 +41,7 @@ struct CustomTextField: View {
                 isEditing = edit
             })
             .textFieldStyle(CustomTextFieldStyle(foregroundColor:Color.blue))
-            .secure
+            
             ///Floating Placeholder
             Text(placeHolderText)
                 .foregroundColor(Color.secondary)
