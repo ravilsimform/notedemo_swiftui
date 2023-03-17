@@ -13,7 +13,7 @@ struct login_view: View {
     var body: some View {
         VStack{
             CustomTextField(placeHolder: "Email", text: $emailTxtField).textFieldStyle(CustomTextFieldStyle(foregroundColor:Color.red))
-            CustomTextField(placeHolder: "Password", text: $passwordTxtField)
+            //CustomTextField(placeHolder: "Password", text: $passwordTxtField,)
             CustomButton(button_text: "Login", action: {})
         }
     }

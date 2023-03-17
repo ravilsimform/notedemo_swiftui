@@ -20,6 +20,7 @@
 		412E57C72934D6E2002FDBD8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 412E57C62934D6E2002FDBD8 /* GoogleService-Info.plist */; };
 		412E57C92934DAC3002FDBD8 /* login_view.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412E57C82934DAC3002FDBD8 /* login_view.swift */; };
 		412E57CB2934DAD3002FDBD8 /* signup_view.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412E57CA2934DAD3002FDBD8 /* signup_view.swift */; };
+		4196514629C4669800092BA1 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4196514529C4669800092BA1 /* Validator.swift */; };
 		41D669322935BCA500041836 /* welcome_view.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D669312935BCA500041836 /* welcome_view.swift */; };
 		41D669372935BD5D00041836 /* custom_button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D669362935BD5D00041836 /* custom_button.swift */; };
 		41D6693A2935CD5D00041836 /* custom_image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D669392935CD5D00041836 /* custom_image.swift */; };
@@ -67,6 +68,7 @@
 		412E57C62934D6E2002FDBD8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		412E57C82934DAC3002FDBD8 /* login_view.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = login_view.swift; sourceTree = "<group>"; };
 		412E57CA2934DAD3002FDBD8 /* signup_view.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = signup_view.swift; sourceTree = "<group>"; };
+		4196514529C4669800092BA1 /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		41D669312935BCA500041836 /* welcome_view.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = welcome_view.swift; sourceTree = "<group>"; };
 		41D669362935BD5D00041836 /* custom_button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = custom_button.swift; sourceTree = "<group>"; };
 		41D669392935CD5D00041836 /* custom_image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = custom_image.swift; sourceTree = "<group>"; };
@@ -267,9 +269,18 @@
 			path = Coordinator;
 			sourceTree = "<group>";
 		};
+		4196514429C4668200092BA1 /* Validator */ = {
+			isa = PBXGroup;
+			children = (
+				4196514529C4669800092BA1 /* Validator.swift */,
+			);
+			path = Validator;
+			sourceTree = "<group>";
+		};
 		41D669332935BD2300041836 /* CustomUIELements */ = {
 			isa = PBXGroup;
 			children = (
+				4196514429C4668200092BA1 /* Validator */,
 				412067AC29C31FB100752B1E /* DynamicStack */,
 				412067A929C31D7100752B1E /* Labels */,
 				412067A629C31B9800752B1E /* TextFields */,
@@ -596,6 +607,7 @@
 				41D669372935BD5D00041836 /* custom_button.swift in Sources */,
 				41D669322935BCA500041836 /* welcome_view.swift in Sources */,
 				412067AE29C31FBD00752B1E /* dynamic_stack.swift in Sources */,
+				4196514629C4669800092BA1 /* Validator.swift in Sources */,
 				41D6693F2935D60A00041836 /* firebase_auth_services.swift in Sources */,
 				412E57C92934DAC3002FDBD8 /* login_view.swift in Sources */,
 				412067A829C31BAF00752B1E /* custom_textfield.swift in Sources */,
