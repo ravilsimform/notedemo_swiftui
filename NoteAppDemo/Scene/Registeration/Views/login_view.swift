@@ -12,8 +12,8 @@ struct login_view: View {
     @State private var passwordTxtField: String = ""
     var body: some View {
         VStack{
-            TextField("Email", text: $emailTxtField).textFieldStyle(CustomTextField())
-            TextField("Password", text: $passwordTxtField).textFieldStyle(CustomTextField())
+            CustomTextField(placeHolder: "Email", text: $emailTxtField).textFieldStyle(CustomTextFieldStyle(foregroundColor:Color.red))
+            CustomTextField(placeHolder: "Password", text: $passwordTxtField)
             CustomButton(button_text: "Login", action: {})
         }
     }

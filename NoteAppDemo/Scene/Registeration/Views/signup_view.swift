@@ -15,10 +15,12 @@ struct signup_view: View {
     @State private var confPasswordTxtField: String = ""
     var body: some View {
         VStack{
-            TextField("First Name", text: $firstNameTextField).textFieldStyle(CustomTextField())
-            TextField("Last Name", text: $lastNameTextField).textFieldStyle(CustomTextField())
-            TextField("Password", text: $passwordTxtField).textFieldStyle(CustomTextField())
-            TextField("Confirm Password", text: $passwordTxtField).textFieldStyle(CustomTextField())
+//            CustomTextField(placeHolder: "First Name", text: $emailTxtField)
+//            CustomTextField(placeHolder: "Last Name", text: $passwordTxtField)
+//            CustomTextField(placeHolder: "Email", text: $emailTxtField)
+//            CustomTextField(placeHolder: "Password", text: $emailTxtField)
+//            CustomTextField(placeHolder: "Confirm Password", text: $passwordTxtField)
+
             CustomButton(button_text: "Signup", action:  {})
         }
     }

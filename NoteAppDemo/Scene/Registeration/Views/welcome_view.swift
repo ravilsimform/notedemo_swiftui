@@ -8,14 +8,37 @@
 import SwiftUI
 
 struct welcome_view: View {
+    @State var tapOnButton: Int? = nil
     
     var body: some View {
-        VStack (){
-            Label("Welcome To\nNote", image:"")
-                .labelStyle(CustomLabelStyle(labelColor: Color.black))
-            Spacer().frame(height:100)
-            CustomButton(button_text: "Login",button_left_image: "star.fill", action: {})
-            CustomButton(button_text: "Signup", action:  {})
+        NavigationView {
+            VStack {
+                titleOfApp
+                Spacer().frame(height:100)
+                loginButton
+                signupButton
+            }
+        }
+    }
+    
+    var titleOfApp: some View {
+        Label("Welcome To\nNote", image:"")
+            .labelStyle(CustomLabelStyle(labelColor: Color.black))
+    }
+    
+    var loginButton: some View {
+        NavigationLink(destination: login_view(),tag:1,selection: $tapOnButton) {
+            CustomButton(button_text: "Login",button_left_image: "star.fill", action: {
+                self.tapOnButton = 1
+            })
+        }
+    }
+    
+    var signupButton: some View {
+        NavigationLink(destination: signup_view(),tag:2,selection: $tapOnButton) {
+            CustomButton(button_text: "Signup", action:  {
+                self.tapOnButton = 2
+            })
         }
     }
 }

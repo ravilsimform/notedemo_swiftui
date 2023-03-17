@@ -7,33 +7,6 @@
 
 import SwiftUI
 
-struct CustomButtonStyle: ButtonStyle {
-    
-    var width: Double?
-    var height: Double?
-    var alignment: Alignment?
-    var backgroundColor, foregroundColor, borderColor: Color?
-    var cornerRadius: Double?
-    var borderWidth: Double?
-    
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .frame(width: width ?? UIScreen.main.bounds.size.width / 1.5, height: height ?? UIScreen.main.bounds.size.height / 30, alignment: alignment ?? Alignment.center)
-            .padding()
-            .lineLimit(1)
-            .minimumScaleFactor(0.7)
-            .background(backgroundColor ?? Color.blue)
-            .foregroundColor(foregroundColor ?? Color.white)
-            .scaleEffect(configuration.isPressed ? 1.2 : 1)
-            .animation(.easeOut(duration: 0.2), value: configuration.isPressed)
-            .cornerRadius(cornerRadius ?? 10.0)
-            .overlay(
-                RoundedRectangle(cornerRadius: cornerRadius ?? 0)
-                    .stroke(borderColor ?? Color.yellow, lineWidth: borderWidth ?? 0)
-            )
-    }
-}
-
 struct CustomButton: View {
     var button_text: String?
     var button_left_image: String?
@@ -63,4 +36,36 @@ struct CustomButton: View {
         return image.getCustomImage();
     }
 }
+
+
+
+struct CustomButtonStyle: ButtonStyle {
+    
+    var width: Double?
+    var height: Double?
+    var alignment: Alignment?
+    var backgroundColor, foregroundColor, borderColor: Color?
+    var cornerRadius: Double?
+    var borderWidth: Double?
+    var lineLimit: Int?
+    var contentPadding: CGFloat?
+    
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .frame(width: width ?? UIScreen.main.bounds.size.width / 1.5, height: height ?? UIScreen.main.bounds.size.height / 30, alignment: alignment ?? Alignment.center)
+            .padding(contentPadding ?? 8)
+            .lineLimit(lineLimit ?? 1)
+            .minimumScaleFactor(0.7)
+            .background(backgroundColor ?? Color.blue)
+            .foregroundColor(foregroundColor ?? Color.white)
+            .scaleEffect(configuration.isPressed ? 1.2 : 1)
+            .animation(.easeOut(duration: 0.2), value: configuration.isPressed)
+            .cornerRadius(cornerRadius ?? 10.0)
+            .overlay(
+                RoundedRectangle(cornerRadius: cornerRadius ?? 0)
+                    .stroke(borderColor ?? Color.yellow, lineWidth: borderWidth ?? 0)
+            )
+    }
+}
+
 

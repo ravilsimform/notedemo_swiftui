@@ -11,24 +11,79 @@ import SwiftUI
 enum customTextFieldStyle {
     case icon, text, icontext
 }
-struct CustomTextField: TextFieldStyle {
+
+struct CustomTextField: View {
+
+    var width: Double?
+    var height: Double?
     
-    var icon: Image? = nil
+       private let placeHolderText: String
+       @Binding var text: String
+       @State private var isEditing = false
+
     
+        public init(placeHolder: String,
+                    text: Binding<String>) {
+           self._text = text
+           self.placeHolderText = placeHolder
+       }
+       var shouldPlaceHolderMove: Bool {
+           isEditing || (text.count != 0)
+       }
+    
+    
+       var body: some View {
+           ZStack(alignment: .leading) {
+               TextField("", text: $text, onEditingChanged: { (edit) in
+                   isEditing = edit
+               }).textFieldStyle(CustomTextFieldStyle(foregroundColor:Color.blue))
+               ///Floating Placeholder
+               Text(placeHolderText)
+               .foregroundColor(Color.secondary)
+               .padding(shouldPlaceHolderMove ?
+                        EdgeInsets(top: 0, leading:15, bottom: (height ?? UIScreen.main.bounds.size.height / 15), trailing: 0) :
+                        EdgeInsets(top: 0, leading:15, bottom: 0, trailing: 0))
+               .scaleEffect(shouldPlaceHolderMove ? 1.0 : 1.2)
+               .animation(.linear)
+               
+           }
+           .onTapGesture {
+               isEditing = true
+            }
+       }
+}
+
+struct CustomTextFieldStyle: TextFieldStyle {
+    var leftIcon: Image? = nil
+    var width: Double?
+    var height: Double?
+    var alignment: Alignment?
+    var backgroundColor, foregroundColor, borderColor: Color?
+    var cornerRadius: Double?
+    var lineWidth: CGFloat?
+    var borderWidth: Double?
+    var contentPadding: CGFloat?
+//    var shadowOrigin: CGRect?
+//    var shadowColor: Color?
+//
     func _body(configuration: TextField<Self._Label>) -> some View {
-        textFieldConntentView(configuration: configuration)
-            .padding()
+            textFieldConntentView(configuration: configuration)
+            .frame(width:(width ?? UIScreen.main.bounds.size.width / 1.25) , height:(height ?? UIScreen.main.bounds.size.height / 15), alignment: Alignment.center)
+            .background(backgroundColor ?? Color.gray.opacity(0.5))
+            .foregroundColor(foregroundColor ?? Color.black)
+            .padding(contentPadding ?? 0)
+          //  .shadow(color: shadowColor ?? Color.teal, radius: cornerRadius ?? 0, x: shadowOrigin?.x ?? 0, y: shadowOrigin?.y ?? 0)
             .overlay {
-                RoundedRectangle(cornerRadius: 8, style: .continuous)
-                    .stroke(Color(UIColor.systemGray4), lineWidth: 2)
+                RoundedRectangle(cornerRadius: cornerRadius ?? 0, style: .continuous)
+                    .stroke(borderColor ?? Color(UIColor.systemGray4), lineWidth: lineWidth ?? 0)
             }
     }
     
     
     func textFieldConntentView(configuration: TextField<Self._Label>) -> AnyView {
-        if(icon != nil) {
-            return  AnyView( HStack {
-                icon
+        if(leftIcon != nil) {
+            return AnyView(HStack {
+                leftIcon
                     .foregroundColor(Color(UIColor.systemGray4))
                 
                 configuration
@@ -37,4 +92,6 @@ struct CustomTextField: TextFieldStyle {
         return AnyView(configuration)
     }
 }
+
+
 
