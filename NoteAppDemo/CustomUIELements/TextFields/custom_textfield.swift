@@ -16,17 +16,16 @@ struct CustomTextField: View {
     
     var width: Double?
     var height: Double?
-    var validator: (() -> Void)?
-
+    var errorText: String
     private let placeHolderText: String
     @Binding var text: String
     @State private var isEditing = false
 
     public init(placeHolder: String,
-                text: Binding<String>) {
+                text: Binding<String>, errorText: String?) {
         self._text = text
         self.placeHolderText = placeHolder
-
+        self.errorText = errorText ?? ""
     }
     
     var shouldPlaceHolderMove: Bool {
@@ -41,7 +40,9 @@ struct CustomTextField: View {
                 isEditing = edit
             })
             .textFieldStyle(CustomTextFieldStyle(foregroundColor:Color.blue))
-            
+            .onReceive(text.publisher) { (value) in
+                print(value);
+            }
             ///Floating Placeholder
             Text(placeHolderText)
                 .foregroundColor(Color.secondary)
@@ -55,8 +56,8 @@ struct CustomTextField: View {
                 }
                 .font(.system(size: 13))
         }
-            if (!$text.wrappedValue.isEmpty) {
-                Text($text.wrappedValue)
+            if (!(errorText.isEmpty)) {
+                Text(errorText)
                     .font(.system(size: 13))
                     .foregroundColor(Color.red)
                     .padding(EdgeInsets(top: 2, leading:0, bottom: 0, trailing: 0))
