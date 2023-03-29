@@ -7,12 +7,40 @@
 
 import Foundation
 
-struct UserModel: Codable {
+struct UserSignupRequestModel: Encodable {
     
-    var firstName: String?
-    var lastName: String?
-    var email: String?
-    var password: String?
+    let firstName, lastName, email, password: String
+    
+    enum CodingKeys: String, CodingKey {
+        case firstName = "first_name"
+        case lastName = "last_name"
+        case email, password
+    }
+    
+}
+
+struct UserSignupResponseModel: Encodable,Decodable {
+    
+    let uId, firstName, lastName, email, password: String
+    
+    enum CodingKeys: String, CodingKey {
+        case firstName = "first_name"
+        case lastName = "last_name"
+        case email, password, uId
+    }
     
     
+}
+
+extension Encodable {
+    func encodedJson() -> [String:Any] {
+        let jsonEncoder = JSONEncoder()
+        do {
+            let jsonData = try jsonEncoder.encode(self)
+            return try JSONSerialization.jsonObject(with: jsonData) as! [String : Any]
+            
+        } catch {
+            return ["error": error]
+        }
+    }
 }

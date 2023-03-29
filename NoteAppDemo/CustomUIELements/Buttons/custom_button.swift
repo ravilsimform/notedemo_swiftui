@@ -41,20 +41,19 @@ struct CustomButton: View {
 
 struct CustomButtonStyle: ButtonStyle {
     
-    var width: Double?
-    var height: Double?
-    var alignment: Alignment?
-    var backgroundColor, foregroundColor, borderColor: Color?
-    var cornerRadius: Double?
-    var borderWidth: Double?
-    var lineLimit: Int?
-    var contentPadding: CGFloat?
+    let width, height, contentPadding, cornerRadius: CGFloat?
+    let alignment: Alignment?
+    let backgroundColor, foregroundColor, borderColor: Color?
+    let borderWidth: Double?
+    let lineLimit: Int?
+    
+    init(){}
     
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .frame(width: width ?? UIScreen.main.bounds.size.width / 1.5, height: height ?? UIScreen.main.bounds.size.height / 30, alignment: alignment ?? Alignment.center)
             .padding(contentPadding ?? 8)
-            .lineLimit(lineLimit ?? 1)
+            .lineLimit((lineLimit ?? 1))
             .minimumScaleFactor(0.7)
             .background(backgroundColor ?? Color.blue)
             .foregroundColor(foregroundColor ?? Color.white)
