@@ -23,12 +23,11 @@ struct CustomButton: View {
     var body: some View {
         Button(action: action) {
             HStack() {
-                
                 getCustomImage(imageType: .system, imageString: "star.fill")
                 Text(button_text ?? "")
                 getCustomImage()
             }
-        }.buttonStyle(CustomButtonStyle())
+        }
     }
     
     func getCustomImage(imageType:ImageType = .system, imageString:String = "") -> Image {
@@ -41,16 +40,18 @@ struct CustomButton: View {
 
 struct CustomButtonStyle: ButtonStyle {
     
-    private var _width: CGFloat = UIScreen.main.bounds.size.width
-    private var _height: CGFloat = 50
-    private var _contentPadding: CGFloat = 0
-    private var _cornerRadius: CGFloat = 0
-    private var _alignment: Alignment = Alignment.center
-    private var _borderWidth: Double = 1.0
-    private var _lineLimit: Int = 1
-    private var _backgroundColor: Color = Color.white
-    private var _foregroundColor: Color = Color.black
-    private var _borderColor: Color = Color.black
+    var _width: CGFloat = UIScreen.main.bounds.size.width
+    var _height: CGFloat = 50
+    var _contentPadding: CGFloat = 0
+    var _cornerRadius: CGFloat = 0
+    var _alignment: Alignment = Alignment.center
+    var _borderWidth: Double = 1.0
+    var _lineLimit: Int = 1
+    var _backgroundColor: Color = Color.white
+    var _foregroundColor: Color = Color.black
+    var _borderColor: Color = Color.black
+    var _shadowOrigin: CGRect = CGRect.zero
+    var _shadowColor: Color = Color.white
     
     var width: CGFloat {
         get {
@@ -132,7 +133,22 @@ struct CustomButtonStyle: ButtonStyle {
         }
     }
     
-  
+    var shadowOrigin: CGRect {
+        get {
+            return _shadowOrigin
+        } set {
+            self._shadowOrigin = newValue
+        }
+    }
+    
+    var shadowColor: Color {
+        get {
+            return _shadowColor
+        } set {
+            self._shadowColor = newValue
+        }
+    }
+    
     
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
@@ -145,6 +161,7 @@ struct CustomButtonStyle: ButtonStyle {
             .scaleEffect(configuration.isPressed ? 1.2 : 1)
             .animation(.easeOut(duration: 0.2), value: configuration.isPressed)
             .cornerRadius(cornerRadius)
+            .shadow(color: shadowColor, radius: cornerRadius, x: shadowOrigin.minX, y: shadowOrigin.minY)
             .overlay(
                 RoundedRectangle(cornerRadius: cornerRadius)
                     .stroke(borderColor, lineWidth: borderWidth)

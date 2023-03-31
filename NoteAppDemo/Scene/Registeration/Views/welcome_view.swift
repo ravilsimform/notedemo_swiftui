@@ -30,7 +30,7 @@ struct welcome_view: View {
         NavigationLink(destination: login_view(),tag:1,selection: $tapOnButton) {
             CustomButton(button_text: "Login",button_left_image: "star.fill", action: {
                 self.tapOnButton = 1
-            })
+            }).buttonStyle(CustomButtonStyle())
         }
     }
     

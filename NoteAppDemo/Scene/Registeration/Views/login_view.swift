@@ -26,9 +26,9 @@ struct login_view: View {
     
     var body: some View {
         VStack{
-            CustomTextField(placeHolder: "Email", text: $emailTxtField, errorText:emailValidator() ).textFieldStyle(CustomTextFieldStyle(foregroundColor:Color.red))
+            CustomTextField(placeHolder: "Email", text: $emailTxtField, errorText:emailValidator(),width:UIScreen.main.bounds.width - 200,height: 40)
             //CustomTextField(placeHolder: "Password", text: $passwordTxtField,)
-            CustomButton(button_text: "Login", action: {})
+            CustomButton(button_text: "Login", action: {}).buttonStyle(CustomButtonStyle(_width:100,_backgroundColor:Color.blue))
         }
     }
 }
