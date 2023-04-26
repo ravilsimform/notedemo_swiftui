@@ -198,12 +198,11 @@ struct CustomTextFieldStyle: TextFieldStyle {
     func _body(configuration: TextField<Self._Label>) -> some View {
         textFieldConntentView(configuration: configuration)
             .font(.system(size: 13))
-            .padding(EdgeInsets(top: 10, leading: 5, bottom: 5, trailing: 10))
-            .frame(minWidth: 100,maxWidth: width ?? UIScreen.main.bounds.width - 40,minHeight: 20,maxHeight: 40,alignment: Alignment.center)
-            //    .frame(width:width, height:height, alignment: Alignment.center)
+            
+            getFrameView(configuration: configuration)
+            //.frame(minWidth: 100,maxWidth: width ,minHeight: 20,maxHeight: 40,alignment: Alignment.center)
             .background(backgroundColor)
             .foregroundColor(foregroundColor)
-            
             .shadow(color: shadowColor, radius: cornerRadius, x: shadowOrigin.minX, y: shadowOrigin.minY)
             .overlay {
                 RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
@@ -211,7 +210,14 @@ struct CustomTextFieldStyle: TextFieldStyle {
             }
     }
     
+    func getFrameView(configuration: TextField<Self._Label>) -> AnyView {
+        if(width == UIScreen.main.bounds.width) {
+            return AnyView(configuration.padding(EdgeInsets(top: 10, leading: 20, bottom: 5, trailing: 20)))
+        }
+        return AnyView(configuration.frame(width: 200) )
+    }
     
+   
     func textFieldConntentView(configuration: TextField<Self._Label>) -> AnyView {
         if(leftIcon != "") {
             return AnyView(HStack {
