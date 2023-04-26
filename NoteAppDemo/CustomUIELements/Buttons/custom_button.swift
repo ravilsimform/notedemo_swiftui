@@ -23,9 +23,9 @@ struct CustomButton: View {
     var body: some View {
         Button(action: action) {
             HStack() {
-                getCustomImage(imageType: .system, imageString: "star.fill")
+                getCustomImage(imageType: .system, imageString: button_left_image ?? "")
                 Text(button_text ?? "")
-                getCustomImage()
+                getCustomImage(imageType: .system, imageString: button_right_image ?? "")
             }
         }
     }

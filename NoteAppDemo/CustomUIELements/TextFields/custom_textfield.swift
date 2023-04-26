@@ -14,7 +14,7 @@ enum customTextFieldStyle {
 
 struct CustomTextField: View {
     
-    var width: CGFloat
+    var width: CGFloat?
     var height: CGFloat
     var errorText: String
     private let placeHolderText: String
@@ -22,7 +22,7 @@ struct CustomTextField: View {
     @State private var isEditing = false
     
     public init(placeHolder: String,
-                text: Binding<String>, errorText: String?,width:CGFloat?,height:CGFloat?) {
+                text: Binding<String>, errorText: String?,width:CGFloat? = 220,height:CGFloat?) {
         self._text = text
         self.placeHolderText = placeHolder
         self.errorText = errorText ?? ""
@@ -37,7 +37,7 @@ struct CustomTextField: View {
     @ObservedObject var textValidator = TextValidator()
     
     var body: some View {
-        VStack(alignment:.leading,spacing:2){
+        VStack(alignment:.leading,spacing:2) {
             ZStack(alignment: .leading) {
                 TextField("", text: $text, onEditingChanged: { (edit) in
                     isEditing = edit
@@ -50,9 +50,9 @@ struct CustomTextField: View {
                 Text(placeHolderText)
                     .foregroundColor(Color.secondary)
                     .padding(shouldPlaceHolderMove ?
-                             EdgeInsets(top: 0, leading:15, bottom: height, trailing: 0) :
-                                EdgeInsets(top: 0, leading:15, bottom: 0, trailing: 0))
-                    .scaleEffect(shouldPlaceHolderMove ? 1.0 : 1.2)
+                             EdgeInsets(top: 0, leading:10, bottom: height, trailing: 0) :
+                                EdgeInsets(top: 0, leading:10, bottom: 0, trailing: 0))
+                    .scaleEffect(shouldPlaceHolderMove ? 1.0 : 1.1)
                     .animation(.linear)
                     .onTapGesture {
                         isEditing = true
@@ -65,7 +65,7 @@ struct CustomTextField: View {
                     .foregroundColor(Color.red)
                     .padding(EdgeInsets(top: 2, leading:0, bottom: 0, trailing: 0))
             }
-        }
+        }.padding(EdgeInsets(top: 5, leading: 20, bottom: 5, trailing: 20))
     }
     
 }
@@ -81,9 +81,9 @@ struct CustomTextFieldStyle: TextFieldStyle {
     var _foregroundColor: Color = Color.black
     var _borderColor: Color =  Color.black
     var _cornerRadius: CGFloat = 0.0
-    var _lineWidth: CGFloat = 0.0
+    var _lineWidth: CGFloat = 1.0
     var _borderWidth: Double = 0.0
-    var _contentPadding: CGFloat = 0.0
+    var _contentPadding: CGFloat = 2.0
     var _isSecure: Bool = false
     var _shadowOrigin: CGRect = CGRect.zero
     var _shadowColor: Color = Color.white
@@ -198,10 +198,12 @@ struct CustomTextFieldStyle: TextFieldStyle {
     func _body(configuration: TextField<Self._Label>) -> some View {
         textFieldConntentView(configuration: configuration)
             .font(.system(size: 13))
-            .frame(width:width, height:height, alignment: Alignment.center)
+            .padding(EdgeInsets(top: 10, leading: 5, bottom: 5, trailing: 10))
+            .frame(minWidth: 100,maxWidth: width ?? UIScreen.main.bounds.width - 40,minHeight: 20,maxHeight: 40,alignment: Alignment.center)
+            //    .frame(width:width, height:height, alignment: Alignment.center)
             .background(backgroundColor)
             .foregroundColor(foregroundColor)
-            .padding(contentPadding)
+            
             .shadow(color: shadowColor, radius: cornerRadius, x: shadowOrigin.minX, y: shadowOrigin.minY)
             .overlay {
                 RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)

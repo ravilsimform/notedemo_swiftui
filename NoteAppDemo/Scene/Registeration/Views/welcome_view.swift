@@ -22,23 +22,22 @@ struct welcome_view: View {
     }
     
     var titleOfApp: some View {
-        Label("Welcome To\nNote", image:"")
-            .labelStyle(CustomLabelStyle(labelColor: Color.black))
+        Text("Welcome To\nNote").multilineTextAlignment(.center)
     }
     
     var loginButton: some View {
         NavigationLink(destination: login_view(),tag:1,selection: $tapOnButton) {
-            CustomButton(button_text: "Login",button_left_image: "star.fill", action: {
+            CustomButton(button_text: "Login", action: {
                 self.tapOnButton = 1
-            }).buttonStyle(CustomButtonStyle())
+            }).buttonStyle(CustomButtonStyle(_width:UIScreen.main.bounds.width / 2))
         }
     }
     
     var signupButton: some View {
-        NavigationLink(destination: signup_view(),tag:2,selection: $tapOnButton) {
-            CustomButton(button_text: "Signup", action:  {
+        NavigationLink(destination: login_view(),tag:1,selection: $tapOnButton) {
+            CustomButton(button_text: "Signin", action: {
                 self.tapOnButton = 2
-            })
+            }).buttonStyle(CustomButtonStyle(_width:UIScreen.main.bounds.width / 2))
         }
     }
 }

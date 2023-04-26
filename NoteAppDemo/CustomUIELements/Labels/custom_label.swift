@@ -50,6 +50,7 @@ struct CustomLabelStyle: LabelStyle {
                 .foregroundColor(labelColor)
                 .background(backgroundColor ?? Color.white)
                 .font(.title)
+            
                 
         }
         
