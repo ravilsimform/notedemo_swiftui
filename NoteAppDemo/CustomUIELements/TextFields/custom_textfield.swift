@@ -20,6 +20,7 @@ struct CustomTextField: View {
     private let placeHolderText: String
     @Binding var text: String
     @State private var isEditing = false
+    @State private var isKeyboardVisible = false;
     
     public init(placeHolder: String,
                 text: Binding<String>, errorText: String?,width:CGFloat? = 220,height:CGFloat?) {
@@ -46,6 +47,11 @@ struct CustomTextField: View {
                 .onReceive(text.publisher) { (value) in
                     print(value);
                 }
+                .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardDidShowNotification)) { _ in
+                    isKeyboardVisible = true;
+                }.onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardDidHideNotification)) { _ in
+                    isKeyboardVisible = false;
+                }
                 ///Floating Placeholder
                 Text(placeHolderText)
                     .foregroundColor(Color.secondary)
@@ -53,19 +59,24 @@ struct CustomTextField: View {
                              EdgeInsets(top: 0, leading:10, bottom: height, trailing: 0) :
                                 EdgeInsets(top: 0, leading:10, bottom: 0, trailing: 0))
                     .scaleEffect(shouldPlaceHolderMove ? 1.0 : 1.1)
-                    .animation(.linear)
                     .onTapGesture {
                         isEditing = true
                     }
                     .font(.system(size: 13))
             }
-            if (!(errorText.isEmpty)) {
-                Text(errorText)
-                    .font(.system(size: 13))
-                    .foregroundColor(Color.red)
-                    .padding(EdgeInsets(top: 2, leading:0, bottom: 0, trailing: 0))
-            }
+            getErrorText()
         }.padding(EdgeInsets(top: 5, leading: 20, bottom: 5, trailing: 20))
+    }
+    
+    
+    func getErrorText() -> AnyView? {
+        if (isKeyboardVisible && !(errorText.isEmpty)) {
+            return AnyView(Text(errorText)
+                .font(.system(size: 13))
+                .foregroundColor(Color.red)
+                .padding(EdgeInsets(top: 2, leading:0, bottom: 0, trailing: 0)))
+        }
+        return nil
     }
     
 }
@@ -193,12 +204,10 @@ struct CustomTextFieldStyle: TextFieldStyle {
         }
     }
     
-    
     func _body(configuration: TextField<Self._Label>) -> some View {
         textFieldConntentView(configuration: configuration)
             .font(.system(size: 13))
-            
-            getFrameView(configuration: configuration)
+            getPaddingView(configuration: configuration)
             .background(backgroundColor)
             .foregroundColor(foregroundColor)
             .shadow(color: shadowColor, radius: cornerRadius, x: shadowOrigin.minX, y: shadowOrigin.minY)

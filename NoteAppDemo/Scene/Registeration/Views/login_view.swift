@@ -12,44 +12,40 @@ struct login_view: View {
     
     @State private var emailTxtField: String = ""
     @State private var passwordTxtField: String = ""
-    
-   func emailValidator() -> String {
-       if($emailTxtField.wrappedValue.isEmpty) {
-            return "Please enter word";
-       } else if($emailTxtField.wrappedValue.count > 3) {
-           return "Please add more word";
-       }
-       return ""
-    }
-    
-    func passwordValidator() -> String {
-        if($passwordTxtField.wrappedValue.isEmpty) {
-             return "Please enter word";
-        } else if($passwordTxtField.wrappedValue.count > 3) {
-            return "Please add more word";
-        }
-        return ""
-     }
-     
-    
-    
+    @ObservedObject var viewModel: SignUpViewModel = SignUpViewModel()
+ 
     var body: some View {
-        VStack{
-            titleOfLoginScreen
-            CustomTextField(placeHolder: "Email", text: $emailTxtField, errorText:emailValidator(),height: 40)
-            CustomTextField(placeHolder: "Password", text: $passwordTxtField,errorText: passwordValidator(),width: UIScreen.main.bounds.width/3,height: 40)
-            CustomButton(button_text: "Login", action: {}).buttonStyle(CustomButtonStyle(_width:100,_backgroundColor:Color.blue))
-        }
+        ZStack{
+            VStack{
+                titleOfLoginScreen
+                Spacer().frame(height:100)
+                emailTextFied
+                passwordTextFied
+                loginButton
+            }
+        } .background(
+            Image("registration_bgview")
+                .resizable()
+                .edgesIgnoringSafeArea(.all)
+                .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        )
+        
     }
     
     var titleOfLoginScreen: some View {
         Text("LOGIN").multilineTextAlignment(.center)
     }
     
-}
-
-struct login_view_Previews: PreviewProvider {
-    static var previews: some View {
-        login_view()
+    var emailTextFied: some View {
+        CustomTextField(placeHolder: "Email", text: $emailTxtField, errorText:viewModel.emailValidator(emailTextField: $emailTxtField.wrappedValue),height: 40)
+    
+    }
+    
+    var passwordTextFied: some View {
+        CustomTextField(placeHolder: "Password", text: $passwordTxtField,errorText: viewModel.passwordValidator(passwordTextField: $passwordTxtField.wrappedValue),width: UIScreen.main.bounds.width/3,height: 40)
+    }
+    
+    var loginButton: some View {
+        CustomButton(button_text: "Login", action: {}).buttonStyle(CustomButtonStyle(_width:100,_backgroundColor:Color.blue))
     }
 }

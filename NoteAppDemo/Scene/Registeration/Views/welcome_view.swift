@@ -12,17 +12,27 @@ struct welcome_view: View {
     
     var body: some View {
         NavigationView {
-            VStack {
-                titleOfApp
-                Spacer().frame(height:100)
-                loginButton
-                signupButton
-            }
+            ZStack {
+                VStack {
+                    titleOfApp
+                    Spacer().frame(height:100)
+                    loginButton
+                    signupButton
+                }
+            }.background(
+                Image("registration_bgview")
+                    .resizable()
+                    .edgesIgnoringSafeArea(.all)
+                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+            )
         }
     }
     
     var titleOfApp: some View {
-        Text("Welcome To\nNote").multilineTextAlignment(.center)
+        Text("Go Green Note")
+            .fontWeight(.bold)
+            .multilineTextAlignment(.leading)
+            .foregroundColor(Color.green)
     }
     
     var loginButton: some View {
@@ -34,8 +44,8 @@ struct welcome_view: View {
     }
     
     var signupButton: some View {
-        NavigationLink(destination: login_view(),tag:1,selection: $tapOnButton) {
-            CustomButton(button_text: "Signin", action: {
+        NavigationLink(destination: signup_view(),tag:2,selection: $tapOnButton) {
+            CustomButton(button_text: "SignUp", action: {
                 self.tapOnButton = 2
             }).buttonStyle(CustomButtonStyle(_width:UIScreen.main.bounds.width / 2))
         }
