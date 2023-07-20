@@ -10,21 +10,28 @@ import SwiftUI
 import Combine
 
 class SignUpViewModel: ObservableObject {
-
-    func emailValidator(emailTextField: String) -> String {
-        if(emailTextField.isEmpty) {
-             return "Please enter email";
-        }
-        return ""
-     }
-     
-     func passwordValidator(passwordTextField: String) -> String {
-         if(passwordTextField.isEmpty) {
-              return "Please enter password";
-         } else if(passwordTextField.count < 6) {
-             return "Please enter 6 character password";
-         }
-         return ""
-      }
     
+    func emailValidator(emailTextField: String) -> String? {
+        if(textFieldValidator(textField: emailTextField) != nil) {
+            
+        }
+        return textFieldValidator(textField: emailTextField)
+    }
+    
+    func passwordValidator(passwordTextField: String) -> String? {
+        if(textFieldValidator(textField: passwordTextField) != nil) {
+            if(passwordTextField.count < 6) {
+                return "Please enter 6 character password";
+            }
+        }
+        return textFieldValidator(textField: passwordTextField)
+    }
+    
+    
+    func textFieldValidator(textField:String) -> String? {
+        if (textField.isEmpty) {
+            return "Please enter value";
+        }
+        return nil
+    }
 }

@@ -9,22 +9,24 @@ import SwiftUI
 
 struct CustomButton: View {
     var button_text: String?
+    var text_Color: Color?
     var button_left_image: String?
     var button_right_image: String?
     let action: () -> Void
     
-    init(button_text:String?,button_left_image: String = "",button_right_image: String = "", action: @escaping ()-> Void){
+    init(button_text:String?,text_color:Color = AppThemeColor.textColor,button_left_image: String = "",button_right_image: String = "", action: @escaping ()-> Void){
         self.button_text = button_text
         self.action = action
         self.button_left_image = button_left_image
         self.button_right_image = button_right_image
+        self.text_Color = text_color
     }
     
     var body: some View {
         Button(action: action) {
             HStack() {
                 getCustomImage(imageType: .system, imageString: button_left_image ?? "")
-                Text(button_text ?? "")
+                Text(button_text ?? "").foregroundColor(text_Color)
                 getCustomImage(imageType: .system, imageString: button_right_image ?? "")
             }
         }
@@ -45,7 +47,7 @@ struct CustomButtonStyle: ButtonStyle {
     var _contentPadding: CGFloat = 0
     var _cornerRadius: CGFloat = 0
     var _alignment: Alignment = Alignment.center
-    var _borderWidth: Double = 1.0
+    var _borderWidth: Double = 0.0
     var _lineLimit: Int = 1
     var _backgroundColor: Color = Color.white
     var _foregroundColor: Color = Color.black

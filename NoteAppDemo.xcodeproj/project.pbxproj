@@ -36,6 +36,7 @@
 		41D669422935D77D00041836 /* user_model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D669412935D77D00041836 /* user_model.swift */; };
 		41D669442935ED8600041836 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D669432935ED8600041836 /* ImageLoader.swift */; };
 		41D669462935F01600041836 /* image_converter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D669452935F01600041836 /* image_converter.swift */; };
+		41E0A3982A1B447C006FF3F3 /* AppThemeColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E0A3972A1B447C006FF3F3 /* AppThemeColor.swift */; };
 		4A20C3C501CF3B017FCCF707 /* Pods_NoteAppDemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46E51A040B542867C5AA5D34 /* Pods_NoteAppDemoTests.framework */; };
 		50BEE6F010772C817761ED8E /* Pods_NoteAppDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D83993D4ADB67DF2DD4CC11 /* Pods_NoteAppDemo.framework */; };
 		8FAA5C52589ABBE04D15DC76 /* Pods_NoteAppDemo_NoteAppDemoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0600A34EB09EFDF87DE779C /* Pods_NoteAppDemo_NoteAppDemoUITests.framework */; };
@@ -92,6 +93,7 @@
 		41D669412935D77D00041836 /* user_model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = user_model.swift; sourceTree = "<group>"; };
 		41D669432935ED8600041836 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		41D669452935F01600041836 /* image_converter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = image_converter.swift; sourceTree = "<group>"; };
+		41E0A3972A1B447C006FF3F3 /* AppThemeColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppThemeColor.swift; sourceTree = "<group>"; };
 		46E51A040B542867C5AA5D34 /* Pods_NoteAppDemoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NoteAppDemoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D83993D4ADB67DF2DD4CC11 /* Pods_NoteAppDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NoteAppDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		57479E6CDBAE37052776E51F /* Pods-NoteAppDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoteAppDemoTests.release.xcconfig"; path = "Target Support Files/Pods-NoteAppDemoTests/Pods-NoteAppDemoTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -267,6 +269,7 @@
 		412E57C52934D640002FDBD8 /* Constants */ = {
 			isa = PBXGroup;
 			children = (
+				41E0A3972A1B447C006FF3F3 /* AppThemeColor.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -657,6 +660,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				41D669462935F01600041836 /* image_converter.swift in Sources */,
+				41E0A3982A1B447C006FF3F3 /* AppThemeColor.swift in Sources */,
 				414DB8E429D402DE00785436 /* app_info.swift in Sources */,
 				419F2D0829D3159A00ED11BE /* firebase_database.swift in Sources */,
 				412E57CB2934DAD3002FDBD8 /* signup_view.swift in Sources */,

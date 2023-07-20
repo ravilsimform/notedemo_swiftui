@@ -17,18 +17,20 @@ struct CustomTextField: View {
     var width: CGFloat?
     var height: CGFloat
     var errorText: String
+    var showFloatingLabel: Bool?
     private let placeHolderText: String
     @Binding var text: String
     @State private var isEditing = false
     @State private var isKeyboardVisible = false;
     
     public init(placeHolder: String,
-                text: Binding<String>, errorText: String?,width:CGFloat? = 220,height:CGFloat?) {
+                text: Binding<String>, errorText: String?,width:CGFloat? = 220,height:CGFloat?,showFloatingLabel:Bool? = false) {
         self._text = text
         self.placeHolderText = placeHolder
         self.errorText = errorText ?? ""
         self.width = width ?? UIScreen.main.bounds.width
         self.height = height ?? 45
+        self.showFloatingLabel = showFloatingLabel ?? false
     }
     
     var shouldPlaceHolderMove: Bool {
@@ -40,10 +42,10 @@ struct CustomTextField: View {
     var body: some View {
         VStack(alignment:.leading,spacing:2) {
             ZStack(alignment: .leading) {
-                TextField("", text: $text, onEditingChanged: { (edit) in
+                TextField(placeHolderText, text: $text, onEditingChanged: { (edit) in
                     isEditing = edit
                 })
-                .textFieldStyle(CustomTextFieldStyle(_foregroundColor:Color.blue))
+              //  .textFieldStyle(CustomTextFieldStyle(_foregroundColor:Color.blue))
                 .onReceive(text.publisher) { (value) in
                     print(value);
                 }
@@ -52,22 +54,28 @@ struct CustomTextField: View {
                 }.onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardDidHideNotification)) { _ in
                     isKeyboardVisible = false;
                 }
-                ///Floating Placeholder
-                Text(placeHolderText)
-                    .foregroundColor(Color.secondary)
-                    .padding(shouldPlaceHolderMove ?
-                             EdgeInsets(top: 0, leading:10, bottom: height, trailing: 0) :
-                                EdgeInsets(top: 0, leading:10, bottom: 0, trailing: 0))
-                    .scaleEffect(shouldPlaceHolderMove ? 1.0 : 1.1)
-                    .onTapGesture {
-                        isEditing = true
-                    }
-                    .font(.system(size: 13))
+                floatingLabel
             }
             getErrorText()
         }.padding(EdgeInsets(top: 5, leading: 20, bottom: 5, trailing: 20))
     }
     
+    @ViewBuilder
+    var floatingLabel: some View {
+        if(showFloatingLabel == true) {
+             AnyView( Text(placeHolderText)
+                .foregroundColor(Color.secondary)
+                .padding(shouldPlaceHolderMove ?
+                         EdgeInsets(top: 0, leading:10, bottom: height, trailing: 0) :
+                            EdgeInsets(top: 0, leading:10, bottom: 0, trailing: 0))
+                    .scaleEffect(shouldPlaceHolderMove ? 1.0 : 1.1)
+                    .onTapGesture {
+                        isEditing = true
+                    }
+                .font(.system(size: 13)))
+        }
+         EmptyView()
+    }
     
     func getErrorText() -> AnyView? {
         if (isKeyboardVisible && !(errorText.isEmpty)) {
@@ -207,7 +215,7 @@ struct CustomTextFieldStyle: TextFieldStyle {
     func _body(configuration: TextField<Self._Label>) -> some View {
         textFieldConntentView(configuration: configuration)
             .font(.system(size: 13))
-            getPaddingView(configuration: configuration)
+        getPaddingView(configuration: configuration)
             .background(backgroundColor)
             .foregroundColor(foregroundColor)
             .shadow(color: shadowColor, radius: cornerRadius, x: shadowOrigin.minX, y: shadowOrigin.minY)
@@ -222,9 +230,9 @@ struct CustomTextFieldStyle: TextFieldStyle {
     }
     
     func getPaddingView(configuration: TextField<Self._Label>) -> AnyView {
-        return AnyView(configuration.padding(EdgeInsets(top: 10, leading: 20, bottom: 5, trailing: 20)))
+        return AnyView(configuration.padding(EdgeInsets(top: 10, leading: 10, bottom: 5, trailing: 10)))
     }
-   
+    
     func textFieldConntentView(configuration: TextField<Self._Label>) -> AnyView {
         if(leftIcon != "") {
             return AnyView(HStack {

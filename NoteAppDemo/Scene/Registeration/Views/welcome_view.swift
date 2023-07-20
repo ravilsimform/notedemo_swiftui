@@ -32,14 +32,15 @@ struct welcome_view: View {
         Text("Go Green Note")
             .fontWeight(.bold)
             .multilineTextAlignment(.leading)
-            .foregroundColor(Color.green)
+            .foregroundColor(AppThemeColor.textColor)
+            .font(.title)
     }
     
     var loginButton: some View {
         NavigationLink(destination: login_view(),tag:1,selection: $tapOnButton) {
             CustomButton(button_text: "Login", action: {
                 self.tapOnButton = 1
-            }).buttonStyle(CustomButtonStyle(_width:UIScreen.main.bounds.width / 2))
+            }).buttonStyle(CustomButtonStyle(_width:UIScreen.main.bounds.width / 2,_borderWidth:1.0,_borderColor: AppThemeColor.textColor))
         }
     }
     
@@ -47,7 +48,7 @@ struct welcome_view: View {
         NavigationLink(destination: signup_view(),tag:2,selection: $tapOnButton) {
             CustomButton(button_text: "SignUp", action: {
                 self.tapOnButton = 2
-            }).buttonStyle(CustomButtonStyle(_width:UIScreen.main.bounds.width / 2))
+            }).buttonStyle(CustomButtonStyle(_width:UIScreen.main.bounds.width / 2,_borderWidth:1.0, _borderColor: AppThemeColor.textColor))
         }
     }
 }
