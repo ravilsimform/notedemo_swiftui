@@ -9,24 +9,44 @@ import Foundation
 import FirebaseAuth
 
 protocol FirebaseAuthServices {
-    func signup(user: UserModel);
-    func login(user: UserModel);
+    func signup(user: UserSignupRequestModel);
+    func login(user: UserSignupRequestModel);
     func signout();
 }
 
 class FirebaseAuth: FirebaseAuthServices {
     
-    func signup(user: UserModel) {
-        Auth.auth().createUser(withEmail: user.email ?? "", password: user.password ?? "") { (result,error) in
-            
+    func signup(user: UserSignupRequestModel) {
+        Auth.auth().createUser(withEmail: user.email ?? "" , password: user.password ?? "" ) { (result,err) in
+             if let error = err {
+                 return
+             }
+             guard let user = result?.user else {return}
+             let emailVarification = EmailVarification()
+             if emailVarification.sendEmailVarification(currentUser: user) {
+                 
+             }
         }
+        
     }
     
-    func login(user: UserModel) {
-        Auth.auth().signIn(withEmail: user.email ?? "", password: user.password ?? "") { (result, error)  in
+    func login(user: UserSignupRequestModel) {
+        Auth.auth().signIn(withEmail: user.email ?? "" , password: user.password ?? "") { (result, err)  in
+            if let error = err {
+                return
+            }
+            guard let user = result?.user else {return}
+            let emailVarification = EmailVarification()
+            if emailVarification.sendEmailVarification(currentUser: user) {
+                
+            }
+       
             
         }
+    
     }
+
+    
     
     func signout() {
         do {

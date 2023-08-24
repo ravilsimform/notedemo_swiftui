@@ -2,6 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:NoteAppDemo/Services/DatabaseServices/CoreDataServices/NoteAppEntity+CoreDataClass.swift">
+   </FileRef>
+   <FileRef
+      location = "group:NoteAppDemo/Services/DatabaseServices/CoreDataServices/NoteAppEntity+CoreDataProperties.swift">
+   </FileRef>
+   <FileRef
       location = "group:NoteAppDemo.xcodeproj">
    </FileRef>
    <FileRef
