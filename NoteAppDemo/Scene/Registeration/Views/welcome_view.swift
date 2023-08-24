@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 struct welcome_view: View {
     @State var tapOnButton: Int? = nil
     
@@ -19,12 +20,19 @@ struct welcome_view: View {
                     loginButton
                     signupButton
                 }
+                
             }.background(
                 Image("registration_bgview")
                     .resizable()
                     .edgesIgnoringSafeArea(.all)
                     .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
             )
+            .toolbar {
+                ToolbarItem(placement:.navigationBarLeading) {
+                    skipButton
+                }
+                
+            }
         }
     }
     
@@ -50,6 +58,27 @@ struct welcome_view: View {
                 self.tapOnButton = 2
             }).buttonStyle(CustomButtonStyle(_width:UIScreen.main.bounds.width / 2,_borderWidth:1.0, _borderColor: AppThemeColor.textColor))
         }
+    }
+    
+    var skipButton: some View {
+        NavigationLink(destination:HomeView(),tag: 3,selection: $tapOnButton) {
+            CustomButton(button_text: "Skip",text_color: AppThemeColor.textColor) {
+                let window = UIApplication
+                            .shared
+                            .connectedScenes
+                            .flatMap { ($0 as? UIWindowScene)?.windows ?? [] }
+                            .first { $0.isKeyWindow }
+                
+                
+                window?.rootViewController = UIHostingController(rootView: HomeView())
+                window?.makeKeyAndVisible()
+                
+                
+            }
+        }
+        .isDetailLink(false)
+        .navigationBarBackButtonHidden(true)
+        
     }
 }
 

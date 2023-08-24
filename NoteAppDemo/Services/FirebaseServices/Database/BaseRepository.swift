@@ -12,8 +12,15 @@ protocol BaseRepository {
     associatedtype T
 
     func create(record: T) async throws
-//    func getAll() -> [T]?
-//    func get(byIdentifier id: UUID) -> T?
-//    func update(record: T) -> Bool
-//    func delete(byIdentifier id: UUID) -> Bool
+    func getAll() -> [T]?
+    func get(byIdentifier id: UUID) -> T?
+    func update(record: T) -> Bool
+    func delete(byIdentifier id: UUID) -> Bool
+}
+
+extension BaseRepository {
+    func getAll() -> [T]? { return nil }
+    func get(byIdentifier id: UUID) -> T? { return nil }
+    func update(record: T) -> Bool { return false }
+    func delete(byIdentifier id: UUID) -> Bool { return false }
 }

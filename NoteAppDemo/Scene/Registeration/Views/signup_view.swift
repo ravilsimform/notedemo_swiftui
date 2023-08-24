@@ -6,15 +6,11 @@
 //
 
 import SwiftUI
-
+import Combine
 struct signup_view: View {
-    @State private var firstNameTextField: String = ""
-    @State private var lastNameTextField: String = ""
-    @State private var emailTxtField: String = ""
-    @State private var passwordTxtField: String = ""
-    @State private var confPasswordTxtField: String = ""
-    @ObservedObject var viewModel: SignUpViewModel = SignUpViewModel()
     
+    @StateObject var viewModel: SignUpViewModel = SignUpViewModel()
+
     
     init() {
         UITableView.appearance().backgroundColor = .clear
@@ -74,27 +70,34 @@ struct signup_view: View {
     }
     
     var fnTextFied: some View {
-        CustomTextField(placeHolder: "First Name", text: $firstNameTextField, errorText:viewModel.textFieldValidator(textField: $firstNameTextField.wrappedValue),height: 40).textFieldStyle(CustomTextFieldStyle(_borderColor:AppThemeColor.themeColor))
-        
+        CustomTextField($viewModel.firstNameField,placeHolder: "FirstName",fieldType: .text,showFloatingLabel: false, editingChanged: { (isChanged) in
+            
+        })
+    
     }
     
     var lnTextFied: some View {
-        CustomTextField(placeHolder: "Last Name", text: $lastNameTextField, errorText:viewModel.textFieldValidator(textField: $lastNameTextField.wrappedValue),height: 40).textFieldStyle(CustomTextFieldStyle(_borderColor:AppThemeColor.themeColor))
-        
-    }
+        CustomTextField($viewModel.lastNameField,placeHolder: "LastName",fieldType: .text,showFloatingLabel: false, editingChanged: { (isChanged) in
+            
+        })    }
     
     var emailTextFied: some View {
-        CustomTextField(placeHolder: "Email", text: $emailTxtField, errorText:viewModel.emailValidator(emailTextField: $emailTxtField.wrappedValue),height: 40).textFieldStyle(CustomTextFieldStyle(_borderColor:AppThemeColor.themeColor))
-        
-    }
+        CustomTextField($viewModel.emailField,placeHolder: "Email",fieldType: .email,showFloatingLabel: false, editingChanged: { (isChanged) in
+            
+        })    }
+    
     
     var passwordTextFied: some View {
-        CustomTextField(placeHolder: "Password", text: $passwordTxtField,errorText: viewModel.passwordValidator(passwordTextField: $passwordTxtField.wrappedValue),width: UIScreen.main.bounds.width/3,height: 40).textFieldStyle(CustomTextFieldStyle(_borderColor:AppThemeColor.themeColor))
-    }
+        CustomTextField($viewModel.passwordField,isSecure: true,placeHolder: "Password",fieldType: .password,showFloatingLabel: false, editingChanged: { (isChanged) in
+            
+        })    }
+    
     
     var confirmPasswordTextFied: some View {
-        CustomTextField(placeHolder: "Confirm Password", text: $confPasswordTxtField, errorText:viewModel.passwordValidator(passwordTextField: $passwordTxtField.wrappedValue),width: UIScreen.main.bounds.width/3,height: 40).textFieldStyle(CustomTextFieldStyle(_borderColor:AppThemeColor.themeColor))
-    }
+        CustomTextField($viewModel.confirmPasswordField,isSecure: true,placeHolder: "Confirm Password",fieldType: .password,showFloatingLabel: false, editingChanged: { (isChanged) in
+            
+        })    }
+    
     
     var signupButton: some View {
         HStack (spacing:100){

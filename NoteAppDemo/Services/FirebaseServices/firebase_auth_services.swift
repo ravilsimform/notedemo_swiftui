@@ -17,7 +17,7 @@ protocol FirebaseAuthServices {
 class FirebaseAuth: FirebaseAuthServices {
     
     func signup(user: UserSignupRequestModel) {
-         Auth.auth().createUser(withEmail: user.email , password: user.password ) { (result,err) in
+        Auth.auth().createUser(withEmail: user.email ?? "" , password: user.password ?? "" ) { (result,err) in
              if let error = err {
                  return
              }
@@ -31,7 +31,7 @@ class FirebaseAuth: FirebaseAuthServices {
     }
     
     func login(user: UserSignupRequestModel) {
-        Auth.auth().signIn(withEmail: user.email , password: user.password ) { (result, err)  in
+        Auth.auth().signIn(withEmail: user.email ?? "" , password: user.password ?? "") { (result, err)  in
             if let error = err {
                 return
             }

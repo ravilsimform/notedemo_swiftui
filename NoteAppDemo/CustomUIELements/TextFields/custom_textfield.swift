@@ -14,72 +14,82 @@ enum customTextFieldStyle {
 
 struct CustomTextField: View {
     
-    var width: CGFloat?
-    var height: CGFloat
-    var errorText: String
-    var showFloatingLabel: Bool?
-    private let placeHolderText: String
-    @Binding var text: String
+    
+    @State var isSelected: Bool = false
+    @FocusState fileprivate var isFocused: Bool
+    
     @State private var isEditing = false
     @State private var isKeyboardVisible = false;
     
-    public init(placeHolder: String,
-                text: Binding<String>, errorText: String?,width:CGFloat? = 220,height:CGFloat?,showFloatingLabel:Bool? = false) {
-        self._text = text
-        self.placeHolderText = placeHolder
-        self.errorText = errorText ?? ""
-        self.width = width ?? UIScreen.main.bounds.width
-        self.height = height ?? 45
-        self.showFloatingLabel = showFloatingLabel ?? false
+    
+    //MARK: Binding Property
+    @Binding private var textFieldValue: String
+    
+    //MARK: Properties
+    private var axis: Axis = .horizontal
+    private var showFloatingLabel: Bool = false
+    private var placeholderText: String = ""
+    private var editingChanged: (Bool) -> () = { _ in }
+    private var commit: () -> () = { }
+    private var fieldType: FieldType = .text
+    private var secureFiled: Bool = false
+    
+    
+    public init(_ text: Binding<String>,
+                isSecure: Bool = false,
+                placeHolder: String = "",
+                fieldType:FieldType = .text,
+                showFloatingLabel:Bool = false,
+                editingChanged: @escaping (Bool)->() = { _ in },
+                commit: @escaping ()->() = { }) {
+        
+        self._textFieldValue = text
+        self.secureFiled = isSecure
+        self.placeholderText = placeHolder
+        self.fieldType = fieldType
+        self.showFloatingLabel = showFloatingLabel
+        self.commit = commit
+        self.editingChanged = editingChanged
+    
     }
     
     var shouldPlaceHolderMove: Bool {
-        isEditing || (text.count != 0)
+        isEditing || ((self.textFieldValue.count) != 0)
     }
-    
-    @ObservedObject var textValidator = TextValidator()
     
     var body: some View {
         VStack(alignment:.leading,spacing:2) {
             ZStack(alignment: .leading) {
-                TextField(placeHolderText, text: $text, onEditingChanged: { (edit) in
-                    isEditing = edit
-                })
-              //  .textFieldStyle(CustomTextFieldStyle(_foregroundColor:Color.blue))
-                .onReceive(text.publisher) { (value) in
-                    print(value);
-                }
-                .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardDidShowNotification)) { _ in
-                    isKeyboardVisible = true;
-                }.onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardDidHideNotification)) { _ in
-                    isKeyboardVisible = false;
+                if(secureFiled) {
+                     SecureField(placeholderText, text: $textFieldValue)
+                } else {
+                     TextField(placeholderText, text: $textFieldValue)
                 }
                 floatingLabel
             }
             getErrorText()
-        }.padding(EdgeInsets(top: 5, leading: 20, bottom: 5, trailing: 20))
+        }.padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
     }
     
+    
+
     @ViewBuilder
     var floatingLabel: some View {
         if(showFloatingLabel == true) {
-             AnyView( Text(placeHolderText)
+            AnyView(Text(placeholderText)
                 .foregroundColor(Color.secondary)
-                .padding(shouldPlaceHolderMove ?
-                         EdgeInsets(top: 0, leading:10, bottom: height, trailing: 0) :
-                            EdgeInsets(top: 0, leading:10, bottom: 0, trailing: 0))
                     .scaleEffect(shouldPlaceHolderMove ? 1.0 : 1.1)
                     .onTapGesture {
                         isEditing = true
                     }
                 .font(.system(size: 13)))
         }
-         EmptyView()
+        EmptyView()
     }
     
     func getErrorText() -> AnyView? {
-        if (isKeyboardVisible && !(errorText.isEmpty)) {
-            return AnyView(Text(errorText)
+        if (isKeyboardVisible) {
+            return AnyView(Text((RegistrationValidator.checkValidation(fieldValue: self._textFieldValue.wrappedValue, field: self.fieldType) ?? ""))
                 .font(.system(size: 13))
                 .foregroundColor(Color.red)
                 .padding(EdgeInsets(top: 2, leading:0, bottom: 0, trailing: 0)))
@@ -245,10 +255,3 @@ struct CustomTextFieldStyle: TextFieldStyle {
         return AnyView(configuration)
     }
 }
-
-class TextValidator: ObservableObject {
-    
-    @Published var text = ""
-    
-}
-

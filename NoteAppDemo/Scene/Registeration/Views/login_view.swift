@@ -6,13 +6,11 @@
 //
 
 import SwiftUI
-
+import Combine
 struct login_view: View {
     
     
-    @State private var emailTxtField: String = ""
-    @State private var passwordTxtField: String = ""
-    @ObservedObject var viewModel: SignUpViewModel = SignUpViewModel()
+    @StateObject var viewModel: SignUpViewModel = SignUpViewModel()
     
     init() {
         UITableView.appearance().backgroundColor = .clear
@@ -28,10 +26,14 @@ struct login_view: View {
                     Spacer().frame(height:20)
                         .listRowBackground(Color.clear)
                         .listRowSeparator(.hidden)
-                    emailTextFied
+                    CustomTextField($viewModel.emailField,placeHolder: "Email",fieldType: .email,showFloatingLabel: false, editingChanged: { (isChanged) in
+                        
+                    })
                         .listRowBackground(Color.clear)
                         .listRowSeparator(.hidden)
-                    passwordTextFied
+                    CustomTextField($viewModel.emailField,isSecure: true,placeHolder: "Password",fieldType: .password,showFloatingLabel: false, editingChanged: { (isChanged) in
+                        
+                    })
                         .listRowBackground(Color.clear)
                         .listRowSeparator(.hidden)
                     loginButton
@@ -59,11 +61,15 @@ struct login_view: View {
     }
     
     var emailTextFied: some View {
-        CustomTextField(placeHolder: "Email", text: $emailTxtField, errorText:viewModel.textFieldValidator(textField: $emailTxtField.wrappedValue),height: 40).textFieldStyle(CustomTextFieldStyle(_borderColor:AppThemeColor.themeColor))
+        CustomTextField($viewModel.emailField,placeHolder: "Email",fieldType: .email,showFloatingLabel: false, editingChanged: { (isChanged) in
+            
+        })
     }
     
     var passwordTextFied: some View {
-        CustomTextField(placeHolder: "Password", text: $passwordTxtField,errorText: viewModel.textFieldValidator(textField: $passwordTxtField.wrappedValue),width: UIScreen.main.bounds.width/3,height: 40).textFieldStyle(CustomTextFieldStyle(_borderColor:AppThemeColor.themeColor))
+        CustomTextField($viewModel.emailField,isSecure: true,placeHolder: "Password",fieldType: .password,showFloatingLabel: false, editingChanged: { (isChanged) in
+            
+        })
     }
     
     var loginButton: some View {

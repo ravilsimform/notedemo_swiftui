@@ -13,7 +13,7 @@ struct UserDatabase: BaseRepository {
     private var db = Firestore.firestore()
     func create(record: UserSignupResponseModel) async throws {
         do {
-             let result = try? await db.collection("users").document(record.uId).setData(record.encodedJson())
+             let result = try? await db.collection("users").document(record.uId ?? "").setData(record.encodedJson())
             print(result)
             
            }

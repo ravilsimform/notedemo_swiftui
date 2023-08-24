@@ -11,27 +11,13 @@ import Combine
 
 class SignUpViewModel: ObservableObject {
     
-    func emailValidator(emailTextField: String) -> String? {
-        if(textFieldValidator(textField: emailTextField) != nil) {
-            
-        }
-        return textFieldValidator(textField: emailTextField)
-    }
-    
-    func passwordValidator(passwordTextField: String) -> String? {
-        if(textFieldValidator(textField: passwordTextField) != nil) {
-            if(passwordTextField.count < 6) {
-                return "Please enter 6 character password";
-            }
-        }
-        return textFieldValidator(textField: passwordTextField)
-    }
+    @Published var firstNameField: String = ""
+    @Published var lastNameField: String = ""
+    @Published var emailField: String = ""
+    @Published var passwordField: String = ""
+    @Published var confirmPasswordField: String = ""
+    @FocusState var isFocused: Bool
+    init() {}
     
     
-    func textFieldValidator(textField:String) -> String? {
-        if (textField.isEmpty) {
-            return "Please enter value";
-        }
-        return nil
-    }
 }

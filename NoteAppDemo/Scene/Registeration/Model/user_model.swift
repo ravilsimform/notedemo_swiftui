@@ -9,7 +9,7 @@ import Foundation
 
 struct UserSignupRequestModel: Encodable {
     
-    let firstName, lastName, email, password: String
+    var firstName, lastName, email, password,confirmPassword: String?
     
     enum CodingKeys: String, CodingKey {
         case firstName = "first_name"
@@ -21,7 +21,7 @@ struct UserSignupRequestModel: Encodable {
 
 struct UserSignupResponseModel: Encodable,Decodable {
     
-    let uId, firstName, lastName, email, password: String
+    let uId, firstName, lastName, email, password: String?
     
     enum CodingKeys: String, CodingKey {
         case firstName = "first_name"
