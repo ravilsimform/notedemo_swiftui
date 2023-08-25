@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct TextDetailView: View {
-    @State var titleTextField: String = ""
-    @State var descriptionTextField: String = ""
+     var noteData: NoteModel? = nil
+    @StateObject var detailViewModel: DetailViewModel = DetailViewModel()
+    
     var body: some View {
         NavigationView {
             ZStack (alignment: .bottom){
@@ -61,7 +62,7 @@ struct TextDetailView: View {
     var textView : some View {
         VStack {
             if #available(iOS 16.0, *) {
-                TextField("Title", text: $titleTextField,axis:.vertical).font(.title)
+                TextField("Title", text: $detailViewModel.titleTextField,axis:.vertical).font(.title)
                     .lineLimit(5)
                     .textInputAutocapitalization(.sentences)
                     .autocorrectionDisabled(false)
@@ -70,13 +71,17 @@ struct TextDetailView: View {
             }
             
             if #available(iOS 16.0, *) {
-                TextField("Note", text: $descriptionTextField,axis:.vertical).font(.body).lineLimit(1000000)
+                TextField("Note", text: $detailViewModel.descriptionTextField,axis:.vertical).font(.body).lineLimit(1000000)
                     .textInputAutocapitalization(.sentences)
                     .autocorrectionDisabled(false)
             } else {
                 // Fallback on earlier versions
             }
         }.padding(.all,10)
+            .onAppear {
+                $detailViewModel.titleTextField.wrappedValue = noteData?.noteTitle ?? ""
+                $detailViewModel.descriptionTextField.wrappedValue = noteData?.noteDesc ?? ""
+            }
     }
     
     
@@ -118,8 +123,8 @@ struct TextDetailView: View {
     }
 }
 
-struct TextDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        TextDetailView()
-    }
-}
+//struct TextDetailView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        TextDetailView()
+//    }
+//}

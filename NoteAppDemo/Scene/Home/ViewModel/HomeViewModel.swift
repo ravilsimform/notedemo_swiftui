@@ -8,10 +8,10 @@
 import Foundation
 import Combine
 
-@MainActor
-class HomeViewModel: ObservableObject {
+final class HomeViewModel: ObservableObject {
     
     @Published var notes: [NoteModel]?
+    @Published var notesDict: [String:Any]?
     @Published var showProgress: Bool = false
     
   
@@ -19,17 +19,29 @@ class HomeViewModel: ObservableObject {
         
     }
     
-   final func fetchAllNotes() async {
+   final func fetchAllNotes()  {
         showProgress = true
         do {
-            
-        } catch {
+            notes =  NoteModel.createMockTest()
+            if((notes?.count ?? 0) > 0) {
+                showProgress = false
+            }
+           // await groupDictionary(notes: notes ?? [])
+        } catch  {
             showProgress = false
            // showProgress = false
             return;
         }
     }
     
+    
+//    final func groupDictionary(notes:[NoteModel]) async {
+//        notesDict = Dictionary(grouping: notes) { (note) -> DateComponents in
+//            let date = Calendar.current.dateComponents([.day, .year, .month], from: (note.updatedDate))
+//            return date
+//        }
+//        print(notesDict)
+//    }
     
     
     

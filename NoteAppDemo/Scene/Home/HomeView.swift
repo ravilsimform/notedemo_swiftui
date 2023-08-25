@@ -15,7 +15,7 @@ struct HomeView: View {
         NavigationView {
             ZStack (alignment:.bottom){
                 VStack {
-                    ScrollView {
+                    ScrollView (showsIndicators:false){
                         searchView
                         NoteListView()
                         

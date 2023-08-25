@@ -19,19 +19,18 @@ struct NoteListView: View {
     
     init(title:String? = nil){
         self.title = title
-    
     }
     
     var body: some View {
         VStack(alignment: .leading) {
-        /*    if(homeViewModel.showProgress) {
+            if(homeViewModel.showProgress) {
                 ProgressView()
-            } else if (!(homeViewModel.notes?.isEmpty ?? false)){*/
+            } else if (!(homeViewModel.notes?.isEmpty ?? false)){
                 Section(
-                    header: Text(title ?? "12/12/1234").foregroundColor(Color.gray).font(.caption).fontWeight(.none).frame(alignment: .leading)) {
+                    header: Text(title ?? "").foregroundColor(Color.gray).font(.caption).fontWeight(.none).frame(alignment: .leading)) {
                         GeometryReader { (geo) in
                             LazyVGrid(columns: columns,spacing: 10) {
-                                ForEach(0..<(homeViewModel.notes?.count ?? 5), id:\.self) { index in
+                                ForEach(0..<(homeViewModel.notes?.count ?? 0), id:\.self) { index in
                                     if (index % 2 ) == 0 {
                                         
                                         NoteListItem(noteItem: homeViewModel.notes?[index]).frame(width:geo.size.width / 2,height: 175,alignment:.top)
@@ -49,15 +48,15 @@ struct NoteListView: View {
                     }
                     }.padding([.leading,.trailing,],16.0)
                     .padding([.top,.bottom,],4)
-            /*} else {
+            } else {
                 EmptyView()
-            }*/
+            }
             
             
         }.listStyle(.insetGrouped)
-            .task {
-                await homeViewModel.fetchAllNotes()
-            }
+        .task {
+             homeViewModel.fetchAllNotes()
+        }
     }
 }
 struct NoteListViewPreviews: PreviewProvider {

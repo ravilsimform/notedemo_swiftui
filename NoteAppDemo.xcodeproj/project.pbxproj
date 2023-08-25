@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		410774562A97CAB90008E14F /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410774552A97CAB90008E14F /* DetailViewModel.swift */; };
 		412067A829C31BAF00752B1E /* custom_textfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412067A729C31BAF00752B1E /* custom_textfield.swift */; };
 		412067AB29C31D9200752B1E /* custom_label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412067AA29C31D9200752B1E /* custom_label.swift */; };
 		412067AE29C31FBD00752B1E /* dynamic_stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412067AD29C31FBD00752B1E /* dynamic_stack.swift */; };
@@ -73,6 +74,7 @@
 
 /* Begin PBXFileReference section */
 		00E272B29E598A977C904BE3 /* Pods-NoteAppDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoteAppDemoTests.debug.xcconfig"; path = "Target Support Files/Pods-NoteAppDemoTests/Pods-NoteAppDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
+		410774552A97CAB90008E14F /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		412067A729C31BAF00752B1E /* custom_textfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = custom_textfield.swift; sourceTree = "<group>"; };
 		412067AA29C31D9200752B1E /* custom_label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = custom_label.swift; sourceTree = "<group>"; };
 		412067AD29C31FBD00752B1E /* dynamic_stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dynamic_stack.swift; sourceTree = "<group>"; };
@@ -325,6 +327,7 @@
 			isa = PBXGroup;
 			children = (
 				4145D7C62A9763FE00723AEF /* Views */,
+				410774552A97CAB90008E14F /* DetailViewModel.swift */,
 			);
 			path = DetailView;
 			sourceTree = "<group>";
@@ -776,6 +779,7 @@
 				4145D7C82A97641900723AEF /* TextDetailView.swift in Sources */,
 				41C494752A94CDEA00E8922B /* NoteListItem.swift in Sources */,
 				414DB8E629D411DB00785436 /* user_database_service.swift in Sources */,
+				410774562A97CAB90008E14F /* DetailViewModel.swift in Sources */,
 				412E57C92934DAC3002FDBD8 /* login_view.swift in Sources */,
 				414DB8E829D4120700785436 /* BaseRepository.swift in Sources */,
 				41C4947A2A94DA7000E8922B /* TabbedItems.swift in Sources */,
